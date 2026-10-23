@@ -1,0 +1,38 @@
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# IDE settings
+.vscode/
+.idea/
+
+# Build and packaging output
+build/
+dist/
+*.egg-info/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Local temporary files
+tmp/
+
+# Generated Whoosh indexes for Buổi 2
+lab02-xay-dung-chi-muc-nguoc/indexdir-*/
+
+# Generated Whoosh index for Buổi 3
+lab03-xu-ly-cau-truy-van/indexdir/
+
+# Temporary extraction used while reviewing the submitted archive
+_review_th03_*/

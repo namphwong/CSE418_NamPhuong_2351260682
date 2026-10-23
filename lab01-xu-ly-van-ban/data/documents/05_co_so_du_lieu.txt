@@ -1,0 +1,1 @@
+Cơ sở dữ liệu lưu trữ thông tin có cấu trúc để chương trình có thể truy vấn và cập nhật. Một hệ quản trị cơ sở dữ liệu cần bảo đảm dữ liệu nhất quán, hạn chế trùng lặp và hỗ trợ nhiều người dùng. Các bảng, khóa và chỉ mục giúp hệ thống làm việc hiệu quả hơn.

@@ -1,0 +1,1 @@
+Xử lý dữ liệu gồm các bước thu thập, làm sạch, biến đổi và phân tích thông tin. Python cung cấp nhiều thư viện giúp chương trình đọc dữ liệu từ file, loại bỏ dữ liệu sai và tạo ra kết quả dễ hiểu. Dữ liệu được chuẩn hóa sẽ hỗ trợ tốt cho việc tìm kiếm và xây dựng mô hình.

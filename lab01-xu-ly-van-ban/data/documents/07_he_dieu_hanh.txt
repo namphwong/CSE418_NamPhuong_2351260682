@@ -1,0 +1,1 @@
+Hệ điều hành quản lý bộ nhớ, bộ xử lý, file và các thiết bị của máy tính. Khi một chương trình được chạy, hệ điều hành phân bổ tài nguyên và kiểm soát quá trình thực thi. Cơ chế phân quyền giúp bảo vệ dữ liệu và ngăn chương trình truy cập trái phép.

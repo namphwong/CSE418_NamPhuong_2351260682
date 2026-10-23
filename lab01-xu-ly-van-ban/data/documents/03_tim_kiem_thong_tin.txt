@@ -1,0 +1,1 @@
+Hệ thống tìm kiếm thông tin tiếp nhận truy vấn của người dùng rồi tìm các tài liệu phù hợp. Để tìm nhanh, hệ thống có thể xây dựng chỉ mục từ và lưu danh sách tài liệu chứa từng từ. Kết quả tìm kiếm cần được sắp xếp để tài liệu liên quan xuất hiện trước.

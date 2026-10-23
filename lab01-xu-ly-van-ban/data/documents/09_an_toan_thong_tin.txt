@@ -1,0 +1,1 @@
+An toàn thông tin tập trung vào việc bảo vệ dữ liệu khỏi mất mát, sửa đổi và truy cập trái phép. Người dùng nên sử dụng mật khẩu mạnh, xác thực nhiều bước và cập nhật phần mềm thường xuyên. Trong mạng máy tính, mã hóa và phân quyền giúp giảm nguy cơ lộ thông tin.

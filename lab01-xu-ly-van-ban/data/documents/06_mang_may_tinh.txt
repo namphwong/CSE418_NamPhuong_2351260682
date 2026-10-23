@@ -1,0 +1,1 @@
+Mạng máy tính kết nối các thiết bị để trao đổi dữ liệu và sử dụng chung tài nguyên. Trong một hệ thống mạng, máy chủ cung cấp dịch vụ còn máy khách gửi yêu cầu và nhận kết quả. Thiết kế mạng cần quan tâm đến tốc độ, độ ổn định và an toàn thông tin.

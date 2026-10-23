@@ -1,0 +1,1 @@
+Học máy là phương pháp để chương trình học mẫu từ dữ liệu và đưa ra dự đoán cho dữ liệu mới. Một quy trình học máy thường gồm chuẩn bị dữ liệu, huấn luyện mô hình và đánh giá kết quả. Python được dùng rộng rãi để xây dựng mô hình phân loại, dự báo và nhận dạng.

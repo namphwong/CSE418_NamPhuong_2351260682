@@ -1,0 +1,1 @@
+Python là ngôn ngữ lập trình dễ đọc và phù hợp để xây dựng nhiều loại chương trình. Người học có thể dùng Python để xử lý dữ liệu, tạo ứng dụng web và thực hiện các bài toán tìm kiếm thông tin. Một chương trình Python thường được chia thành các hàm nhỏ để dễ kiểm tra và bảo trì.

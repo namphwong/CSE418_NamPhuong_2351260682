@@ -1,0 +1,1 @@
+Trí tuệ nhân tạo giúp máy tính thực hiện những nhiệm vụ cần khả năng suy luận hoặc nhận dạng. Một hệ thống trí tuệ nhân tạo thường sử dụng dữ liệu để học quy luật và tạo ra dự đoán. Chất lượng dữ liệu và cách đánh giá mô hình có ảnh hưởng lớn đến kết quả.

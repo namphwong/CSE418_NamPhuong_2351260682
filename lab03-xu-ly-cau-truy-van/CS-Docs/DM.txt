@@ -1,0 +1,2 @@
+Data Mining
+Data mining is the process of extracting and finding patterns in massive data sets involving methods at the intersection of machine learning, statistics, and database systems.

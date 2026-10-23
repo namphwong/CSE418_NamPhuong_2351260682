@@ -1,0 +1,1 @@
+Lập trình web tạo ra các trang và dịch vụ hoạt động qua mạng Internet. Một ứng dụng web thường nhận truy vấn HTTP, xử lý dữ liệu ở máy chủ rồi trả kết quả cho trình duyệt. Ứng dụng có thể kết nối cơ sở dữ liệu để lưu tài khoản, nội dung và lịch sử hoạt động.
