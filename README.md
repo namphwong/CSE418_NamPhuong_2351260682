@@ -8,7 +8,7 @@ Repository thực hành của sinh viên **Nam Phuong (2351260682)**.
 |---|---|---|
 | 1 | Xử lý văn bản | Hoàn thành - Phase 11 |
 | 2 | Xây dựng chỉ mục ngược | Hoàn thành - Phase 11 |
-| 3 | Xử lý câu truy vấn | Chưa thực hiện |
+| 3 | Xử lý câu truy vấn | Hoàn thành - Phase 11 |
 | 4 | Đánh giá truy hồi thông tin | Chưa thực hiện |
 | 5 | Phân loại văn bản | Chưa thực hiện |
 
@@ -16,7 +16,7 @@ Repository thực hành của sinh viên **Nam Phuong (2351260682)**.
 
 Mỗi buổi thực hành được tổ chức trong một thư mục riêng. Code, dữ liệu, test và hướng dẫn chạy của từng buổi sẽ được đặt cùng khu vực để dễ theo dõi và đưa lên GitHub.
 
-Buổi 1 đã hoàn thành tại [`lab01-xu-ly-van-ban/`](lab01-xu-ly-van-ban/). Buổi 2 đã hoàn thành tại [`lab02-xay-dung-chi-muc-nguoc/`](lab02-xay-dung-chi-muc-nguoc/). Các file PDF `TH01` đến `TH05` ở thư mục gốc là tài liệu đề bài; phần cài đặt của các buổi 3 đến 5 sẽ được bổ sung sau.
+Buổi 1 đã hoàn thành tại [`lab01-xu-ly-van-ban/`](lab01-xu-ly-van-ban/). Buổi 2 đã hoàn thành tại [`lab02-xay-dung-chi-muc-nguoc/`](lab02-xay-dung-chi-muc-nguoc/). Buổi 3 đã hoàn thành tại [`lab03-xu-ly-cau-truy-van/`](lab03-xu-ly-cau-truy-van/). Các file PDF và ZIP `TH01` đến `TH05` ở thư mục gốc là tài liệu đề bài; phần cài đặt Buổi 4 và Buổi 5 sẽ được bổ sung sau.
 
 ## Cấu trúc chính
 
@@ -32,6 +32,12 @@ Buổi 1 đã hoàn thành tại [`lab01-xu-ly-van-ban/`](lab01-xu-ly-van-ban/).
 │   ├── src/                        # Bài 1-3 và module Whoosh dùng chung
 │   ├── tests/                      # Unit test và integration test
 │   └── README.md                   # Hướng dẫn chi tiết Buổi 2
+├── lab03-xu-ly-cau-truy-van/
+│   ├── CS-Docs/                    # 5 tài liệu mẫu tiếng Anh
+│   ├── index.py                    # Xây dựng chỉ mục Whoosh
+│   ├── search.py                   # Tìm kiếm thân thiện/nâng cao
+│   ├── tests/                      # 17 kiểm thử tự động
+│   └── README.md                   # Hướng dẫn chi tiết Buổi 3
 ├── requirements.txt                # Dependency dùng chung
 └── README.md
 ```
@@ -80,6 +86,17 @@ Set-Location lab01-xu-ly-van-ban
 
 Xem [`lab01-xu-ly-van-ban/README.md`](lab01-xu-ly-van-ban/README.md) để biết lệnh chạy riêng từng bài, mô tả đầu vào/đầu ra và quy ước dữ liệu.
 
+## Chạy nhanh Buổi 3
+
+```powershell
+Set-Location lab03-xu-ly-cau-truy-van
+..\.venv\Scripts\python.exe index.py
+..\.venv\Scripts\python.exe -m unittest discover -s tests -p "test_*.py" -v
+..\.venv\Scripts\python.exe search.py
+```
+
+Buổi 3 có giao diện nhập nhóm từ bắt buộc, tùy chọn và bị cấm; chế độ nâng cao có thể chạy bằng `search.py --advanced`. Xem [`lab03-xu-ly-cau-truy-van/README.md`](lab03-xu-ly-cau-truy-van/README.md) để biết chi tiết.
+
 ## Tiến độ
 
 - [x] Khởi tạo cấu trúc cho Buổi 1
@@ -87,6 +104,7 @@ Xem [`lab01-xu-ly-van-ban/README.md`](lab01-xu-ly-van-ban/README.md) để biế
 - [x] Hoàn thành các bài tập Buổi 1 (Phase 2-9)
 - [x] Hoàn thiện kiểm thử và tài liệu Buổi 1 (Phase 10-11)
 - [x] Hoàn thành Buổi 2: xây dựng chỉ mục ngược (Phase 1-11)
+- [x] Hoàn thành Buổi 3: xử lý câu truy vấn (Phase 1-11)
 
 ## Tiêu chí bàn giao Buổi 1
 
@@ -96,4 +114,4 @@ Xem [`lab01-xu-ly-van-ban/README.md`](lab01-xu-ly-van-ban/README.md) để biế
 - Có workflow GitHub Actions tại [`.github/workflows/ci.yml`](.github/workflows/ci.yml).
 - Có hướng dẫn cài đặt, chạy, kiểm thử và cấu trúc dữ liệu trong [README Buổi 1](lab01-xu-ly-van-ban/README.md).
 
-**Trạng thái hiện tại:** Buổi 1 và Buổi 2 hoàn thành; các buổi 3-5 chưa bắt đầu triển khai.
+**Trạng thái hiện tại:** Buổi 1, Buổi 2 và Buổi 3 hoàn thành; Buổi 4 và Buổi 5 chưa bắt đầu triển khai.
