@@ -9,6 +9,7 @@ from __future__ import annotations
 
 from collections.abc import Iterable
 from typing import Literal
+import re
 
 from underthesea import word_tokenize as vietnamese_word_tokenize
 
@@ -57,16 +58,20 @@ def tokenize_document(
             f"unsupported language {language!r}; use 'vietnamese' or 'whitespace'"
         )
 
-    normalized_text = normalize_text(remove_punctuation(text))
+    normalized_text = normalize_text(text)
     if not normalized_text:
         return []
 
     if language == "vietnamese":
-        raw_tokens: Iterable[str] = vietnamese_word_tokenize(
-            normalized_text, format="list"
-        )
+        # Segment each sentence separately so punctuation removal cannot join sentences.
+        raw_tokens: Iterable[str] = [
+            token
+            for sentence in re.split(r"[.!?。！？]+", normalized_text)
+            if remove_punctuation(sentence)
+            for token in vietnamese_word_tokenize(remove_punctuation(sentence), format="list")
+        ]
     else:
-        raw_tokens = normalized_text.split()
+        raw_tokens = remove_punctuation(normalized_text).split()
 
     tokens: list[str] = []
     for token in raw_tokens:

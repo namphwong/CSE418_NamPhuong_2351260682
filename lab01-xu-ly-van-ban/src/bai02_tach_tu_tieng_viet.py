@@ -80,7 +80,7 @@ def contains_token(tokens: Iterable[str], query: str) -> bool:
             )
         normalized_tokens.append(normalize_text(token))
 
-    return normalized_query in normalized_tokens
+    return any(c.isalnum() for c in normalized_query) and normalized_query in normalized_tokens
 
 
 def contains_word(document: str, query: str) -> bool:

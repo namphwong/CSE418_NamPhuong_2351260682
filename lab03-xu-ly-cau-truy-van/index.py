@@ -14,7 +14,7 @@ from __future__ import annotations
 from pathlib import Path
 from whoosh.fields import ID, TEXT, Schema
 from whoosh.filedb.filestore import FileStorage
-from whoosh.index import FileIndex, create_in
+from whoosh.index import FileIndex
 
 
 PROJECT_DIR = Path(__file__).resolve().parent
@@ -79,29 +79,16 @@ def build_index(
     """
 
     docs_dir = Path(root).resolve()
-    target_dir = Path(index_dir).resolve()
-    target_dir.mkdir(parents=True, exist_ok=True)
-
-    index: FileIndex = create_in(str(target_dir), make_schema())
-    writer = index.writer()
     paths = document_paths(docs_dir)
+    documents = []
+    for path in paths:
+        title, content = read_document(path)
+        documents.append(dict(title=f"{path.name} - {title}", path=str(path), content=content))
     try:
-        for path in paths:
-            title, content = read_document(path)
-            writer.add_document(
-                # Giữ cả tên file và tiêu đề, giống chương trình mẫu.
-                title=f"{path.name} - {title}",
-                path=str(path),
-                content=content,
-            )
-        writer.commit()
-    except Exception:
-        writer.cancel()
-        raise
-    finally:
-        index.close()
-
-    return target_dir
+        from .safe_index import rebuild_index
+    except ImportError:
+        from safe_index import rebuild_index
+    return rebuild_index(index_dir, make_schema(), documents)
 
 
 def open_index(index_dir: str | Path = DEFAULT_INDEX_DIR) -> FileIndex:

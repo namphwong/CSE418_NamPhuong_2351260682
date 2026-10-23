@@ -61,6 +61,9 @@ def split_terms(text: str) -> list[str]:
         raise ValueError(
             "Không phân tích được nhóm từ. Hãy đóng dấu ngoặc kép cho phrase."
         )
+    for token in tokens:
+        if not re.fullmatch(r'([\w*?]+|"[^"\\]+"(?:~\d+)?)', token) or token.upper() in {"AND", "OR", "NOT", "ANDNOT", "ANDMAYBE", "TO"} or any(c in token for c in ":()[]{}^\\"):
+            raise ValueError("Cú pháp logic/trường không được phép ở chế độ thân thiện; dùng --advanced.")
     return tokens
 
 
@@ -202,7 +205,7 @@ def _choose_result(
 
         try:
             content = read_result_content(results[selection - 1])
-        except (FileNotFoundError, KeyError) as exc:
+        except (OSError, UnicodeError, KeyError) as exc:
             output_fn(f"Không thể đọc tài liệu: {exc}")
             return True
 
@@ -211,6 +214,18 @@ def _choose_result(
         return True
 
 
+def _end_on_input_close(function):
+    from functools import wraps
+    @wraps(function)
+    def wrapped(*args, **kwargs):
+        try:
+            return function(*args, **kwargs)
+        except (EOFError, KeyboardInterrupt):
+            kwargs.get("output_fn", print)("Đã kết thúc chương trình.")
+    return wrapped
+
+
+@_end_on_input_close
 def run_friendly_cli(
     index_dir: str | Path = DEFAULT_INDEX_DIR,
     *,
@@ -269,6 +284,7 @@ def run_friendly_cli(
             return
 
 
+@_end_on_input_close
 def run_advanced_cli(
     index_dir: str | Path = DEFAULT_INDEX_DIR,
     *,

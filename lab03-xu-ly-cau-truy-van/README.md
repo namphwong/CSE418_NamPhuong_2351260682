@@ -85,7 +85,7 @@ mach?ne
 Từ thư mục gốc repository:
 
 ```powershell
-..\.venv\Scripts\python.exe -m compileall -q lab03-xu-ly-cau-truy-van
+.\.venv\Scripts\python.exe -m compileall -q lab03-xu-ly-cau-truy-van
 Set-Location lab03-xu-ly-cau-truy-van
 ..\.venv\Scripts\python.exe -m unittest discover -s tests -p "test_*.py" -v
 ```
@@ -100,3 +100,13 @@ Bộ test kiểm tra:
 - Đánh số kết quả từ 1.
 - Xem nội dung tài liệu.
 - Xử lý số thứ tự kết quả không hợp lệ.
+
+## Quy tắc nhập và xây lại index
+
+Nhóm optional vẫn yêu cầu ít nhất một từ xuất hiện khi được nhập, đúng ví dụ của đề. Chế độ thân thiện nhận từ đơn (Unicode), wildcard và phrase có thể kèm ~N; không nhận toán tử AND/OR/NOT, trường title:, dấu ngoặc hay boost. Dùng --advanced khi cần cú pháp Whoosh đầy đủ.
+
+Sau khi sửa CS-Docs, chạy lại index.py. Index mới chỉ thay index cũ sau khi xây thành công. Lỗi nguồn hoặc lỗi ghi không xóa index cũ. Việc xây lại giả định một tiến trình ghi tại một thời điểm; đóng phiên tìm kiếm trước khi thay index trên Windows.
+
+Kiểm thử bổ sung kiểm tra rebuild thất bại/khôi phục khi thay thư mục lỗi, EOF, phrase đúng thứ tự, proximity trong/ngoài giới hạn, wildcard * và ?, và logic của ba nhóm từ.
+
+Bộ kiểm thử sau hoàn thiện: 22 test.

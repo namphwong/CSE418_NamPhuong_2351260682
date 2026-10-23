@@ -7,10 +7,10 @@ from typing import Callable, Iterable
 
 try:
     from .data import DEFAULT_DOCUMENTS, Document, get_document
-    from .whoosh_common import create_index, document_schema, open_index, search_index, tokenize_vietnamese
+    from .whoosh_common import rebuild_index, document_schema, open_index, search_index, tokenize_vietnamese
 except ImportError:  # pragma: no cover
     from data import DEFAULT_DOCUMENTS, Document, get_document
-    from whoosh_common import create_index, document_schema, open_index, search_index, tokenize_vietnamese
+    from whoosh_common import rebuild_index, document_schema, open_index, search_index, tokenize_vietnamese
 
 
 DEFAULT_INDEX_DIR = Path(__file__).resolve().parents[1] / "indexdir-bai03"
@@ -26,19 +26,14 @@ def build_index(
     tạo postings và không được lưu trong stored fields.
     """
 
-    index = create_index(index_dir, document_schema())
-    writer = index.writer()
-    try:
-        for document in documents:
-            writer.add_document(
-                doc_id=str(document.document_id),
-                title=document.title,
-                content=tokenize_vietnamese(document.content),
-            )
-        writer.commit()
-    except Exception:
-        writer.cancel()
-        raise
+    documents = tuple(documents)
+    ids = [d.document_id for d in documents]
+    if any(type(i) is not int or i <= 0 for i in ids) or len(set(ids)) != len(ids):
+        raise ValueError("Mã tài liệu phải là số nguyên dương và không trùng.")
+    rebuild_index(index_dir, document_schema(), (
+        dict(doc_id=str(d.document_id), title=d.title, content=tokenize_vietnamese(d.content))
+        for d in documents
+    ))
     return Path(index_dir)
 
 
@@ -75,6 +70,18 @@ def format_results(results: list[dict[str, str]]) -> list[str]:
     return lines
 
 
+def _end_on_input_close(function):
+    from functools import wraps
+    @wraps(function)
+    def wrapped(*args, **kwargs):
+        try:
+            return function(*args, **kwargs)
+        except (EOFError, KeyboardInterrupt):
+            kwargs.get("output_fn", print)("Đã kết thúc chương trình.")
+    return wrapped
+
+
+@_end_on_input_close
 def run_cli(
     index_dir: str | Path = DEFAULT_INDEX_DIR,
     *,
@@ -85,7 +92,7 @@ def run_cli(
     """Chạy vòng lặp nhập truy vấn, chọn kết quả và xem toàn văn."""
 
     build_index(index_dir, documents)
-    output_fn("Đã xây dựng chỉ mục ngược cho 10 tài liệu.")
+    output_fn(f"Đã xây dựng chỉ mục ngược cho {len(documents)} tài liệu.")
     output_fn("Nhập q, quit hoặc exit để kết thúc.")
 
     while True:
@@ -104,19 +111,25 @@ def run_cli(
             output_fn("Không có tài liệu phù hợp.")
             continue
 
-        raw_selection = input_fn("Nhập số thứ tự kết quả để xem nội dung: ").strip()
-        try:
-            selection = int(raw_selection)
-        except ValueError:
-            output_fn("Số thứ tự phải là một số nguyên.")
-            continue
-        if not 1 <= selection <= len(results):
-            output_fn(f"Số thứ tự phải nằm trong khoảng 1 đến {len(results)}.")
-            continue
+        while True:
+            raw_selection = input_fn("Nhập số thứ tự kết quả để xem nội dung: ").strip()
+            if raw_selection.lower() in {"q", "quit", "exit"}:
+                output_fn("Đã kết thúc chương trình.")
+                return
+            try:
+                selection = int(raw_selection)
+            except ValueError:
+                output_fn("Số thứ tự phải là một số nguyên.")
+                continue
+            if not 1 <= selection <= len(results):
+                output_fn(f"Số thứ tự phải nằm trong khoảng 1 đến {len(results)}.")
+                continue
 
-        selected = result_document(results[selection - 1], documents)
-        output_fn(f"\nNội dung tài liệu {selected.document_id} - {selected.title}:")
-        output_fn(selected.content)
+            selected = result_document(results[selection - 1], documents)
+            output_fn(f"\nNội dung tài liệu {selected.document_id} - {selected.title}:")
+            output_fn(selected.content)
+
+            break
 
 
 def main() -> None:
@@ -125,4 +138,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

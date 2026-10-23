@@ -11,6 +11,11 @@ from whoosh.filedb.filestore import FileStorage
 from whoosh.index import FileIndex, create_in
 from whoosh.qparser import QueryParser
 
+try:
+    from .safe_index import rebuild_index
+except ImportError:
+    from safe_index import rebuild_index
+
 
 def basic_schema() -> Schema:
     """Tạo schema theo ví dụ của tài liệu thực hành."""

@@ -166,9 +166,9 @@ Pipeline của bài:
 ```text
 Tài liệu đầu vào
         ↓
-Chuẩn hóa Unicode, chữ thường và dấu câu
+Chuẩn hóa Unicode, chữ thường; giữ ranh giới câu
         ↓
-Tách token bằng Underthesea
+Tách từng câu riêng bằng Underthesea, xử lý dấu câu trong câu
         ↓
 Loại token chỉ chứa dấu câu
         ↓
@@ -389,7 +389,7 @@ Chạy toàn bộ unit test và integration test:
 ..\.venv\Scripts\python.exe -m unittest discover -s tests -p "test_*.py" -v
 ```
 
-Phase 10 kiểm tra 54 trường hợp, bao gồm:
+Phase 10 kiểm tra 56 trường hợp, bao gồm:
 
 - Các hàm dùng chung ở Phase 2.
 - Tách từ tiếng Anh và Porter stemming.
@@ -432,7 +432,7 @@ Buổi thực hành 1 đã hoàn thiện toàn bộ sáu yêu cầu trong tài l
 | Bài 5: giao và hợp danh sách số nguyên | [`src/bai05_giao_hop.py`](src/bai05_giao_hop.py) | Hoàn thành |
 | Bài 6: inverted index và truy vấn tài liệu | [`src/bai06_truy_van.py`](src/bai06_truy_van.py) | Hoàn thành |
 | Dữ liệu đầu vào | [`data/documents/`](data/documents/) | 10 file UTF-8 |
-| Kiểm thử | [`tests/`](tests/) | 54 test cases |
+| Kiểm thử | [`tests/`](tests/) | 56 test cases |
 | CI | [`../.github/workflows/ci.yml`](../.github/workflows/ci.yml) | Đã cấu hình |
 
 ## Lệnh kiểm tra chuẩn
@@ -466,3 +466,5 @@ Set-Location lab01-xu-ly-van-ban
 - [x] README hướng dẫn được cập nhật để người khác có thể clone, cài đặt và chạy lại.
 
 **Trạng thái:** Buổi 1 hoàn thành ở Phase 11. Không còn hạng mục bắt buộc nào trong phạm vi thực hành 1.
+
+Query chỉ chứa dấu câu ở Bài 2 trả NOT FOUND. Tokenizer Bài 3 giữ ranh giới các câu trước khi bỏ dấu câu; test hồi quy kiểm tra cả TF, DF và truy vấn.

@@ -7,8 +7,7 @@ from pathlib import Path
 try:
     from .whoosh_common import (
         basic_schema,
-        commit_documents,
-        create_index,
+        rebuild_index,
         open_index,
         search_index,
         tokenize_vietnamese,
@@ -16,8 +15,7 @@ try:
 except ImportError:  # pragma: no cover
     from whoosh_common import (
         basic_schema,
-        commit_documents,
-        create_index,
+        rebuild_index,
         open_index,
         search_index,
         tokenize_vietnamese,
@@ -48,7 +46,6 @@ DEFAULT_INDEX_DIR = Path(__file__).resolve().parents[1] / "indexdir-bai02"
 def build_vietnamese_index(index_dir: str | Path = DEFAULT_INDEX_DIR) -> Path:
     """Tách từ toàn bộ tài liệu rồi ghi bản đã tách vào Whoosh."""
 
-    index = create_index(index_dir, basic_schema())
     indexed_documents = []
     for document in VIETNAMESE_DOCUMENTS:
         indexed_documents.append(
@@ -58,7 +55,7 @@ def build_vietnamese_index(index_dir: str | Path = DEFAULT_INDEX_DIR) -> Path:
                 "content": tokenize_vietnamese(document["content"]),
             }
         )
-    commit_documents(index, indexed_documents)
+    rebuild_index(index_dir, basic_schema(), indexed_documents)
     return Path(index_dir)
 
 
@@ -87,5 +84,8 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except (EOFError, KeyboardInterrupt):
+        print("Đã kết thúc chương trình.")
 

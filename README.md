@@ -36,7 +36,7 @@ Buổi 1 đã hoàn thành tại [`lab01-xu-ly-van-ban/`](lab01-xu-ly-van-ban/).
 │   ├── CS-Docs/                    # 5 tài liệu mẫu tiếng Anh
 │   ├── index.py                    # Xây dựng chỉ mục Whoosh
 │   ├── search.py                   # Tìm kiếm thân thiện/nâng cao
-│   ├── tests/                      # 17 kiểm thử tự động
+│   ├── tests/                      # 22 kiểm thử tự động
 │   └── README.md                   # Hướng dẫn chi tiết Buổi 3
 ├── requirements.txt                # Dependency dùng chung
 └── README.md
@@ -110,8 +110,24 @@ Buổi 3 có giao diện nhập nhóm từ bắt buộc, tùy chọn và bị c�
 
 - Sáu bài thực hành có mã nguồn độc lập trong `lab01-xu-ly-van-ban/src/`.
 - Mười tài liệu tiếng Việt mẫu được lưu trong `data/documents/` và có bảng ánh xạ ID.
-- Có 54 unit test/integration test và kiểm tra cú pháp bằng `compileall`.
+- Có 56 unit test/integration test và kiểm tra cú pháp bằng `compileall`.
 - Có workflow GitHub Actions tại [`.github/workflows/ci.yml`](.github/workflows/ci.yml).
 - Có hướng dẫn cài đặt, chạy, kiểm thử và cấu trúc dữ liệu trong [README Buổi 1](lab01-xu-ly-van-ban/README.md).
 
 **Trạng thái hiện tại:** Buổi 1, Buổi 2 và Buổi 3 hoàn thành; Buổi 4 và Buổi 5 chưa bắt đầu triển khai.
+
+## Hoàn thiện sau rà soát Buổi 1–3
+
+Xem [kế hoạch và tiến độ](docs/reviews/KE_HOACH_HOAN_THIEN_BUOI_1_2_3.md) và [kết quả nghiệm thu](docs/reviews/KET_QUA_HOAN_THIEN_BUOI_1_2_3.md). CI chạy độc lập cả ba lab. Buổi 4 và 5 tiếp tục chưa triển khai.
+
+## Tổ chức tài liệu và kiểm tra toàn repo
+
+- `docs/reviews/`: kế hoạch sửa chữa, báo cáo rà soát và nghiệm thu Buổi 1–3.
+- Các file TH01–TH05 ở gốc là đề bài gốc; giữ nguyên để đối chiếu. Buổi 4–5 chưa triển khai.
+- Index Whoosh, cache và môi trường ảo là dữ liệu sinh tự động, không đưa vào Git.
+
+Chạy kiểm tra cả ba buổi từ bất kỳ thư mục nào bằng script:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\check-labs.ps1
+```

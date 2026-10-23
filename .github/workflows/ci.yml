@@ -1,31 +1,27 @@
-name: Lab 01 checks
-
+name: Labs 01-03 checks
 on:
   push:
   pull_request:
-
 jobs:
   test:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        lab: [lab01-xu-ly-van-ban, lab02-xay-dung-chi-muc-nguoc, lab03-xu-ly-cau-truy-van]
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-
       - name: Install dependencies
         run: python -m pip install -r requirements.txt
-
-      - name: Download NLTK data
-        run: python -c "import nltk; nltk.download('popular')"
-
-      - name: Compile Python sources
-        working-directory: lab01-xu-ly-van-ban
-        run: python -m compileall -q src tests
-
-      - name: Run unit and integration tests
-        working-directory: lab01-xu-ly-van-ban
+      - name: Download required NLTK tokenizer data
+        if: matrix.lab == 'lab01-xu-ly-van-ban'
+        run: python -c "import nltk; assert nltk.download('punkt', raise_on_error=True); assert nltk.download('punkt_tab', raise_on_error=True)"
+      - name: Compile sources
+        working-directory: ${{ matrix.lab }}
+        run: python -m compileall -q .
+      - name: Unit and integration tests
+        working-directory: ${{ matrix.lab }}
         run: python -m unittest discover -s tests -p "test_*.py" -v

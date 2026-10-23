@@ -5,9 +5,9 @@ from __future__ import annotations
 from pathlib import Path
 
 try:  # Cho phép chạy bằng cả `python -m src...` và `python src\...py`.
-    from .whoosh_common import basic_schema, commit_documents, create_index, open_index, search_index
+    from .whoosh_common import basic_schema, rebuild_index, open_index, search_index
 except ImportError:  # pragma: no cover
-    from whoosh_common import basic_schema, commit_documents, create_index, open_index, search_index
+    from whoosh_common import basic_schema, rebuild_index, open_index, search_index
 
 
 DEMO_DOCUMENTS = (
@@ -29,8 +29,7 @@ DEFAULT_INDEX_DIR = Path(__file__).resolve().parents[1] / "indexdir-bai01"
 def build_demo_index(index_dir: str | Path = DEFAULT_INDEX_DIR) -> Path:
     """Tạo lại index mẫu và trả về đường dẫn index."""
 
-    index = create_index(index_dir, basic_schema())
-    commit_documents(index, DEMO_DOCUMENTS)
+    rebuild_index(index_dir, basic_schema(), DEMO_DOCUMENTS)
     return Path(index_dir)
 
 
@@ -54,5 +53,8 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except (EOFError, KeyboardInterrupt):
+        print("Đã kết thúc chương trình.")
 

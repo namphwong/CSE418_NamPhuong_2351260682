@@ -103,3 +103,9 @@ Các test kiểm tra:
 - Hiển thị số thứ tự kết quả bắt đầu từ 1.
 - Luồng CLI hợp lệ và xử lý số thứ tự sai.
 
+
+## Hoàn thiện sau rà soát
+
+Bộ test hiện có 14 trường hợp. Cả ba bài xây index qua safe_index.py: ghi vào thư mục tạm rồi thay thế sau commit, khôi phục index cũ nếu bước thay thế lỗi. Sử dụng một tiến trình ghi tại một thời điểm và đóng phiên tìm kiếm trước khi rebuild trên Windows.
+
+Bài 3 kiểm tra ID nguyên dương không trùng, hiển thị số tài liệu thực tế, cho nhập lại lựa chọn sai và nhận q tại bước chọn kết quả. EOF/Ctrl+C kết thúc chương trình gọn.
