@@ -2,11 +2,6 @@
 
 Repository lưu trữ đề bài và bài thực hành môn **CSE418 - Truy hồi thông tin**.
 
-## Thông tin sinh viên
-
-- Họ và tên: Nam Phương
-- Mã sinh viên: 2351260682
-
 ## Cấu trúc repository
 
 ```text
