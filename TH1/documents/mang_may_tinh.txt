@@ -1,0 +1,1 @@
+Mạng máy tính kết nối các thiết bị để trao đổi dữ liệu và chia sẻ tài nguyên.

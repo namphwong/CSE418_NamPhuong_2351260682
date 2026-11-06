@@ -1,0 +1,1 @@
+Cơ sở dữ liệu giúp lưu trữ, quản lý và truy xuất thông tin hiệu quả.

@@ -1,0 +1,1 @@
+Học máy giúp máy tính học từ dữ liệu và đưa ra dự đoán.
